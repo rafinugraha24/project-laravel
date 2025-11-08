@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MasterAlamatSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         DB::table('master_alamat')->insert([
@@ -41,14 +38,22 @@ class MasterAlamatSeeder extends Seeder
                 'provinsi' => 'Jawa Timur',
                 'kota' => 'Surabaya',
                 'kecamatan' => 'Tegalsari',
+<<<<<<< HEAD
                 'kode_pos' => '60363',
+=======
+                'kode_pos' => '60262',
+>>>>>>> 85533f302d4f807168946b8718457cbd6832715a
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'provinsi' => 'Bali',
                 'kota' => 'Denpasar',
+<<<<<<< HEAD
                 'kecamatan' => 'Denpasar',
+=======
+                'kecamatan' => 'Denpasar Selatan',
+>>>>>>> 85533f302d4f807168946b8718457cbd6832715a
                 'kode_pos' => '80228',
                 'created_at' => now(),
                 'updated_at' => now(),

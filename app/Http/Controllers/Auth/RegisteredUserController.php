@@ -39,6 +39,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user',
         ]);
 
         event(new Registered($user));
@@ -46,12 +47,13 @@ class RegisteredUserController extends Controller
         Auth::login($user);
         $user = Auth::user();
 
+        $user = Auth::user();
+
         if ($user->role === 'admin') {
             return redirect()->route('dashboard');
         }
 
         return redirect()->route('ekyc.step1');
-
         // return redirect(route('dashboard', absolute: false));
     }
 }
