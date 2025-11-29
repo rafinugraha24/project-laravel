@@ -11,7 +11,7 @@ class LandingProgram extends Model
 
     protected $table = 'landing_programs';
 
-    protected$fillable = [
+    protected $fillable = [
         'title',
         'description',
         'icon',
@@ -25,7 +25,7 @@ class LandingProgram extends Model
     ];
 
     // Scope helper
-    public function sopeActive($query)
+    public function scopeActive($query)
     {
         return $query->where('status', true);
     }

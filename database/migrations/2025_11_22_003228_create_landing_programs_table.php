@@ -9,23 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('landing_nav_links', function (Blueprint $table) {
+        Schema::create('landing_programs', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
-            $table->string('url')->nullable()->comment('relative anchor (#program) atau full url');
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('icon')->nullable()->comment('opsional: nama file/icon class atau url');
             $table->integer('position')->default(0)->index();
             $table->boolean('status')->default(true)->index();
             $table->timestamps();
+            $table->softDeletes(); // optional: enable soft delete
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('landing_nav_links');
+        Schema::dropIfExists('landing_programs');
     }
 };
