@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Footer_Links') }}
+            {{ __('Navigation Menu') }}
         </h2>
     </x-slot>
 
-    <div x-data="footerPage()" class="py-12">
+    <div x-data="navPage()" class="py-12">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
@@ -20,20 +20,22 @@
             <div class="mb-6">
                 <button @click="openCreateModal()"
                     class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    + Tambah Link
+                    + Tambah Menu
                 </button>
             </div>
 
             {{-- Tabel Data --}}
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6">
 
-                    <h3 class="font-semibold text-lg mb-4">Daftar Footer Links</h3>
+                    <h3 class="font-semibold text-lg mb-4 text-gray-800 dark:text-gray-100">
+                        Daftar Navigation Menu
+                    </h3>
 
                     <table class="table-auto w-full border">
                         <thead class="bg-gray-200 text-gray-700">
                             <tr>
-                                <th class="px-4 py-2 text-center w-16">Pos</th>
+                                <th class="px-4 py-2 w-16 text-center">Pos</th>
                                 <th class="px-4 py-2">Label</th>
                                 <th class="px-4 py-2">URL</th>
                                 <th class="px-4 py-2 text-center w-24">Status</th>
@@ -42,7 +44,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach($links as $item)
+                            @foreach($items as $item)
                                 <tr>
                                     <td class="border px-4 py-2 text-center">{{ $item->position }}</td>
                                     <td class="border px-4 py-2">{{ $item->label }}</td>
@@ -56,18 +58,19 @@
 
                                     <td class="border px-4 py-2 text-center">
 
-                                        {{-- EDIT BUTTON --}}
-                                        <button @click="openEditModal({{ $item }})"
-                                                class="px-3 py-1 bg-yellow-500 text-white rounded">
+                                        {{-- EDIT --}}
+                                        <button 
+                                            @click="openEditModal({{ $item }})"
+                                            class="px-3 py-1 bg-yellow-500 text-white rounded">
                                             Edit
                                         </button>
 
                                         {{-- DELETE --}}
-                                        <form action="{{ route('admin.landing.footer.destroy', $item->id) }}"
+                                        <form action="{{ route('admin.landing.navigation.destroy', $item->id) }}"
                                               method="POST" class="inline-block">
                                             @csrf @method('DELETE')
                                             <button type="submit"
-                                                onclick="return confirm('Hapus link ini?')"
+                                                onclick="return confirm('Hapus menu ini?')"
                                                 class="px-3 py-1 bg-red-600 text-white rounded">
                                                 Hapus
                                             </button>
@@ -84,17 +87,19 @@
 
         </div>
 
+
+
         {{-- ---------------------------------------------------- --}}
         {{-- MODAL CREATE --}}
         {{-- ---------------------------------------------------- --}}
         <div x-show="showCreate"
-             class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
+             class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
              x-transition>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-96 shadow-lg">
 
-                <h2 class="text-xl font-semibold mb-4">Tambah Footer Link</h2>
+                <h2 class="text-xl font-semibold mb-4">Tambah Menu Navigasi</h2>
 
-                <form method="POST" action="{{ route('admin.landing.footer.store') }}" class="space-y-4">
+                <form method="POST" action="{{ route('admin.landing.navigation.store') }}" class="space-y-4">
                     @csrf
 
                     <div>
@@ -104,7 +109,12 @@
 
                     <div>
                         <label class="block mb-1">URL</label>
-                        <input type="text" name="url" class="border-gray-300 rounded-md w-full">
+                        <input type="text" name="url" class="border-gray-300 rounded-md w-full" required>
+                    </div>
+
+                    <div>
+                        <label class="block mb-1">Position</label>
+                        <input type="number" name="position" value="0" class="border-gray-300 rounded-md w-full" required>
                     </div>
 
                     <div>
@@ -118,7 +128,7 @@
                     <div class="flex justify-end gap-2">
                         <button type="button"
                                 @click="showCreate=false"
-                                class="px-4 py-2 bg-gray-500 text-white rounded">
+                                class="px-4 py-2 bg-gray-600 text-white rounded">
                             Batal
                         </button>
 
@@ -127,23 +137,26 @@
                             Simpan
                         </button>
                     </div>
+
                 </form>
 
             </div>
         </div>
 
+
+
         {{-- ---------------------------------------------------- --}}
         {{-- MODAL EDIT --}}
         {{-- ---------------------------------------------------- --}}
         <div x-show="showEdit"
-             class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
+             class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
              x-transition>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-96 shadow-lg">
 
-                <h2 class="text-xl font-semibold mb-4">Edit Footer Link</h2>
+                <h2 class="text-xl font-semibold mb-4">Edit Menu</h2>
 
                 <form method="POST"
-                      :action="'/admin/landing/footer/' + editData.id"
+                      :action="'/admin/landing/navigation/' + editData.id"
                       class="space-y-4">
                     @csrf
                     @method('PUT')
@@ -153,7 +166,8 @@
                         <input type="text"
                                name="label"
                                x-model="editData.label"
-                               class="border-gray-300 rounded-md w-full" required>
+                               class="border-gray-300 rounded-md w-full"
+                               required>
                     </div>
 
                     <div>
@@ -161,13 +175,23 @@
                         <input type="text"
                                name="url"
                                x-model="editData.url"
-                               class="border-gray-300 rounded-md w-full">
+                               class="border-gray-300 rounded-md w-full"
+                               required>
+                    </div>
+
+                    <div>
+                        <label class="block mb-1">Position</label>
+                        <input type="number"
+                               name="position"
+                               x-model="editData.position"
+                               class="border-gray-300 rounded-md w-full"
+                               required>
                     </div>
 
                     <div>
                         <label class="block mb-1">Status</label>
                         <select name="status"
-                                x-model.number="editData.status"
+                                x-model="editData.status"
                                 class="border-gray-300 rounded-md w-full">
                             <option value="1">Aktif</option>
                             <option value="0">Nonaktif</option>
@@ -177,7 +201,7 @@
                     <div class="flex justify-end gap-2">
                         <button type="button"
                                 @click="showEdit=false"
-                                class="px-4 py-2 bg-gray-500 text-white rounded">
+                                class="px-4 py-2 bg-gray-600 text-white rounded">
                             Batal
                         </button>
 
@@ -186,21 +210,24 @@
                             Update
                         </button>
                     </div>
+
                 </form>
 
             </div>
         </div>
 
+
+
+
     </div>
 
-    {{-- ---------------------------------------------------- --}}
-    {{-- ALPINE.JS CONTROLLER --}}
-    {{-- ---------------------------------------------------- --}}
+    {{-- Alpine Controller --}}
     <script>
-        function footerPage() {
+        function navPage() {
             return {
                 showCreate: false,
                 showEdit: false,
+
                 editData: {},
 
                 openCreateModal() {
@@ -212,11 +239,12 @@
                         id: item.id,
                         label: item.label,
                         url: item.url,
-                        status: Number(item.status)
+                        position: item.position,
+                        status: item.status,
                     };
                     this.showEdit = true;
                 }
-            };
+            }
         }
     </script>
 

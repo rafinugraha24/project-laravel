@@ -16,10 +16,11 @@
             <h1 class="text-2xl font-bold text-blue-600">LP3I</h1>
             <!-- konten : navbar  -->
             <nav class="hidden md:flex gap-8 text-gray-700 font-medium">
-                <a href="#beranda" class="hover:text-blue-600">Beranda</a>
-                <a href="#program" class="hover:text-blue-600">Program</a>
-                <a href="#tentang" class="hover:text-blue-600">Tentang</a>
-                <a href="#kontak" class="hover:text-blue-600">Kontak</a>
+                 @foreach ($navigation as $nav)
+                    <a href="{{ $nav->url }}" class="hover:text-blue-600">
+                        {{ $nav->label }}
+                    </a>
+                @endforeach
             </nav>
 
             <div class="flex gap-3">
@@ -35,7 +36,7 @@
                         @else
                             <a
                                 href="{{ route('login') }}"
-                                class="px-4 py-2 text-blue-600 font-semibold"
+                                class="px-4 py-2 text-blue-600 border border-blue-600 rounded-xl hover:bg-blue-50 font-semibold"
                             >
                                 Log in
                             </a>
@@ -100,7 +101,7 @@
 
             <div class="grid md:grid-cols-3 gap-8">
             @foreach($programs as $program)
-                <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-xl  transition">
                     <h4 class="text-xl font-semibold mb-3">{{ $program->name }}</h4>
                     <p class="text-gray-600">{{ $program->description }}</p>
                 </div>
@@ -142,10 +143,11 @@
             <div>
                 <h4 class="text-xl font-semibold mb-3">Navigasi</h4>
                 <ul class="space-y-2 text-gray-100">
-                    <li><a href="#beranda" class="hover:underline">Beranda</a></li>
-                    <li><a href="#program" class="hover:underline">Program</a></li>
-                    <li><a href="#tentang" class="hover:underline">Tentang</a></li>
-                    <li><a href="#kontak" class="hover:underline">Kontak</a></li>
+                    @foreach ($footerNav as $itemNav)
+                        <li><a href="{{ $itemNav->url }}" class="hover:underline">
+                            {{ $itemNav->label }}
+                        </a></li>
+                    @endforeach
                 </ul>
             </div>
             <div>

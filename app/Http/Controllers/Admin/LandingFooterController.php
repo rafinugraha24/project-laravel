@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\LandingFooterLink;
@@ -65,9 +65,9 @@ class LandingFooterController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'label' => 'required|string|max:100',
-            'url'   => 'nullable|url|max:255',
-            'status'=> 'required|boolean'
+            'label'  => 'required|string|max:100',
+            'url'    => 'nullable|max:255',
+            'status' => 'required|boolean',
         ]);
 
         $footer = LandingFooterLink::findOrFail($id);
