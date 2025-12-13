@@ -72,6 +72,12 @@
                                     {{ request()->routeIs('admin.landing.settings.*') ? 'bg-gray-200 font-semibold' : '' }}">
                                     🛠 Settings
                                 </a>
+                                
+                                <a href="{{ route('admin.landing.tentangs.index') }}"
+                                    class="block px-4 py-2 hover:bg-gray-200 
+                                    {{ request()->routeIs('admin.landing.tentangs.*') ? 'bg-gray-200 font-semibold' : '' }}">
+                                    📑 Tentang
+                                </a>
 
                                 <a href="{{ route('admin.landing.navigation.index') }}"
                                     class="block px-4 py-2 hover:bg-gray-200 

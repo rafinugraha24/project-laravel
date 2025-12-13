@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\LandingSettingController;
 use App\Http\Controllers\Admin\LandingNavController;
 use App\Http\Controllers\Admin\LandingProgramController;
 use App\Http\Controllers\Admin\LandingFooterController;
+use App\Http\Controllers\Admin\LandingTentangController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,9 @@ Route::middleware('auth')->group(function () {
     /** LANDING PAGE CMS */
     Route::prefix('admin/landing')->name('admin.landing.')->group(function () {
         Route::resource('settings', LandingSettingController::class)->only([
+            'index', 'store', 'edit', 'update'
+        ]);
+        Route::resource('tentangs', LandingTentangController::class)->only([
             'index', 'store', 'edit', 'update'
         ]);
         Route::resource('navigation', LandingNavController::class)->except(['show']);

@@ -86,9 +86,7 @@
             <!-- Image -->
             <div class="flex justify-center">
                 <!-- konten : banner image -->
-                <img src="{{ asset('uploads/' . ($landing['hero_image'] ?? 'hero-lp3i.png')) }}" alt="Mahasiswa LP3I" class="w-full max-w-2xl object-cover object-cover rounded-xl shadow-lg" />
-
-
+                <img src="{{ asset('uploads/' . ($landing['hero_image'] ?? 'hero-lp3i.png')) }}" alt="Mahasiswa LP3I" class="w-full max-w-2xl object-cover rounded-xl shadow-lg" />
             </div>
         </div>
     </section>
@@ -117,17 +115,15 @@
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
             <div>
                 <h3 class="text-3xl font-bold text-gray-900 mb-6">Tentang LP3I</h3>
-                <p class="text-gray-600 leading-relaxed mb-4">
-                    LP3I adalah lembaga pendidikan vokasi yang telah berdiri lebih dari 30 tahun,
-                    berfokus pada pendidikan yang langsung terhubung dengan dunia kerja.
-                </p>
-                <p class="text-gray-600 leading-relaxed">
-                    Dengan kurikulum berbasis industri, dosen praktisi, dan jaringan perusahaan luas,
-                    LP3I telah membantu ribuan lulusan untuk siap bekerja sejak semester awal.
+                <p class="text-lg text-gray-600 mb-8">
+                    {!! $landing['desc'] ?? 'LP3I adalah lembaga pendidikan vokasi yang telah berdiri lebih dari 30 tahun, berfokus pada pendidikan yang langsung terhubung dengan dunia kerja.<br><br>
+            Dengan kurikulum berbasis industri, dosen praktisi, dan jaringan perusahaan luas, LP3I telah membantu ribuan lulusan untuk siap bekerja sejak semester awal.' !!}
                 </p>
             </div>
-            <div>
-                <img src="{{ asset('uploads/landing/mahasiswa-lp3i.png') }}" class="rounded-xl shadow-lg"/>
+            <!-- Image -->
+            <div class="flex justify-center">
+                <!-- konten : banner image -->
+                <img src="{{ asset('uploads/' . ($landing['tentang_image'] ?? 'landing/mahasiswa-lp3i.png')) }}" alt="Mahasiswa LP3I" class="w-full max-w-2xl object-cover rounded-xl shadow-lg" />
             </div>
         </div>
     </section>

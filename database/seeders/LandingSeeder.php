@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\LandingSetting;
+use App\Models\LandingTentang;
 use App\Models\LandingProgram;
 use App\Models\LandingNavLink;
 use App\Models\LandingFooterLink;
@@ -28,6 +29,24 @@ class LandingSeeder extends Seeder
                 ['value' => $item[1], 'type' => $item[2], 'status' => 1]
             );
         }
+
+        /** ===============================
+         * LANDING SETTINGS (Hero Section)
+         * =============================== */
+        $tentang = [
+            ['tentang', 'Tentang LP3I', 'text'],
+            ['desc', 'LP3I adalah lembaga pendidikan vokasi yang telah berdiri lebih dari 30 tahun, berfokus pada pendidikan yang langsung terhubung dengan dunia kerja.<br>
+            Dengan kurikulum berbasis industri, dosen praktisi, dan jaringan perusahaan luas, LP3I telah membantu ribuan lulusan untuk siap bekerja sejak semester awal.', 'text'],
+            ['tentang_image', 'landing/mahasiswa-lp3i.png', 'image']
+        ];
+
+        foreach ($tentang as $item) {
+            LandingTentang::updateOrCreate(
+                ['key' =>$item[0]],
+                ['value' => $item[1], 'type' => $item[2]]
+            );
+        }
+
 
         /** ===============================
          * NAVIGATION MENU
